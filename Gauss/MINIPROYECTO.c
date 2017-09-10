@@ -69,8 +69,58 @@ int main()
 		}	
 	}	
 	
+	//Se verifica si la matriz tiene filas con 0 o empieza con 0 y las acomoda
+	//Intercambio de filas
+	int a,k,auxiliar,auxiliar2,bandera,filaConCeros;
+	bandera=-1;
+	a=0;
+	j=0;
+	for(k=a;k<m-1;k++){
+		if (matriz2[k][0]==0){
+			printf("K es igual a %d",k);	
+			//Verificar si hay una fila con ceros
+			bandera=1;
+			while(bandera==1 && j<=n){
+				for(j=0;j<=n;j++){
+					if (matriz2[k][j]!=0){
+						bandera=0;//No hacer nada
+						j=n+1;
+					}
+					else{
+						bandera=1; //Cambiar al fina
+						filaConCeros=k;
+						printf("\nbandera eee%d",bandera);
+					}
+				}
+				if (bandera==1){ //Intercambio de fila con ceros 
+					for (j=0;j<=n;j++){ //
+						printf("\nESTEM");
+						auxiliar2=matriz2[filaConCeros][j];//
+						matriz2[filaConCeros][j]=matriz2[m-1][j];
+						matriz2[m-1][j]=auxiliar2;
+					}
+				}
+				else{
+					for (j=0;j<=n;j++){ //
+						printf("\nESTEMi k %d \n",k);
+						if (matriz2[k+1][j]!=0){
+							auxiliar=matriz2[k][j];
+							matriz2[k][j]=matriz2[k+1][j];
+							matriz2[k+1][j]=auxiliar;
+						}
+						else{
+							k++;
+						}
+					}
+				}
+			}
+		}
+		bandera=-1;
+		a=0;
+	}
+	
 	printf("\n");	
-	printf("Esta es la matriz 2\n");
+	printf("Esta es la matriz intercambiada\n");
 	for(i=0;i<m;i++)
 	{
 		for(j=0;j<=n;j++)
@@ -79,97 +129,61 @@ int main()
 		}
 		printf("\n");
 	}
-	
 	//Algoritmo para Gauss
 	//Preguntar si el primer numero es diferente de cero de la primera columna
-	int a,b,k,filas, columnas,contador,contador2,auxiliar,p;
+	int filas, columnas,contador;
 	float x,numerador,denominador;
 	k=0;
-	for (k; k<=m; k++){
-		if (matriz[k][0]!=0)
+	
+	if (matriz2[k][0]!=0)
+	{
+		contador=0;
+		while (contador<m-1)
 		{
-			printf("HOLA");
-			//Se hace el agoritmo
-			contador=0;
-			while (contador<m-1)
-			{
-				//numerador=matriz2[contador+1][contador];
-				//denominador=matriz2[contador][contador];
-				//x=(numerador/denominador);
-				
-				//printf("\nNumerador %.1f\t Denominador%.1f",numerador,denominador);
-				//printf("\nx vale: %.2f", x);//Constante//Constante
-				//
-				//columnas=contador;
-				filas=contador+1;
-				
-				for(filas;filas<m;filas++){
-					printf("Las filas son %d____",filas);
-					contador2=contador;
-					columnas=contador;
-					printf("contador2 %d %d columnas %d\n",contador2,contador2 + 1,columnas);
-					
-					numerador=matriz2[contador2 + 1*filas - contador][contador];
-					denominador=matriz2[contador][contador];
-					if (denominador == 0){ // para que no sea x/0;
-						numerador=matriz2[contador2 + 1*filas - contador][contador+1];
-						denominador=matriz2[contador][contador+1];
-						
-					}
-					x=(numerador/denominador);
-					printf("Numerador %.2f\n",numerador);
-					printf("Numerador %.2f\n",denominador);
-					for(columnas;columnas <= n; columnas++){  
-						printf("\nEl valor de columnas es : %d",columnas);
-						matriz2[filas][columnas]=-1*matriz2[filas-1*filas+contador][columnas]*x + matriz2[filas][columnas];
-						printf("\nLa matriz de posicion(%d,%d)es %.4f:",filas,columnas,matriz2[filas][columnas]);
-						printf("\n");
-					}
-					//se hace con la siguiente fila
-					printf("\n");
-					contador2++;
+			filas=contador+1;
+			for(filas;filas<m;filas++){
+				columnas=contador;
+				numerador=matriz2[filas][columnas];
+				denominador=matriz2[contador][contador];
+				if (denominador == 0.00){ // para que no sea x/0;
+					numerador=matriz2[filas][contador+1];
+					denominador=matriz2[contador][contador+1];
 				}
-				//siguiente columna para escalonar
-				contador++;
-				printf("\n El contador es %d\n",contador);
-			}
-			k=m;
-			/*cambiar var por n*/
-		}
-		else{
-			k++;
-			//Intercambio de filas
-			for(k;k<m;k++){
-				j=0;
-				if (matriz[k][0]!=0){
-					for (p=0;p<=n;p++){ //p son columnas 0 hasta 3
-						auxiliar=matriz2[k][j];//
-						matriz2[k][j]=matriz2[0][j];
-						matriz2[0][j]=auxiliar;
-						j++; //j son las columnas de la primera fila
-					}
-					break;
+				x=(numerador/denominador);
+				for(columnas;columnas <= n; columnas++){  
+					matriz2[filas][columnas]=-1*matriz2[contador][columnas]*x + matriz2[filas][columnas];
 				}
-			}
-			printf("\nMatriz con fila intercambiada\n");
-			for(i=0;i<m;i++)
-			{
-				for(j=0;j<=n;j++)
+				if (bandera==1)
 				{
-					printf("%.2f\t",matriz2[i][j]);
+					for (i = m-1; i <m; i++) {
+						for (j = 0; j <=n; j++){
+							matriz2[i][j]=0;
+						}
+					}
 				}
+				//se hace con la siguiente fila
 				printf("\n");
 			}
+			//siguiente columna para escalonar
+			contador++;
 		}
 	}
-	printf("\n Matriz final \n\n");
+	
+printf("\n Matriz final \n\n");
+for (i = 0; i < m; i++) {
+	for (j = 0; j <=n; j++){
+		printf ("%.2f\t", matriz2[i][j]);
+	}
+	printf ("\n");
+}
+	//OUTPUT EN ARCHIVO DE TEXTO
+	freopen ("output1.txt", "w", stdout);
 	for (i = 0; i < m; i++) {
 		for (j = 0; j <=n; j++){
 			printf ("%.2f\t", matriz2[i][j]);
 		}
 		printf ("\n");
 	}
-	
+	fclose (stdout);
 	return EXIT_SUCCESS;
 }
-
