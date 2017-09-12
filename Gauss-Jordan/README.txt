@@ -1,6 +1,4 @@
-Este programa funciona abriendo una txt. y tomando los datos en �l formando una matriz 
-con m x n dimensiones y posteriormente aplica el algoritmo de eliminaci�n Gaussiana que primero
-verifica que la primera fila no empiece con 0, para luego multiplicar la primera fila en un n�mero que sumado a la segunda fila quede 
-cero debajo del primer numero, y posteriormente seguir con la segunda fila hasta terminar las n filas.
-Despues de terminar las filas, pasa a la siguiente columna y realiza lo mismo hasta que haya cero debajo de cada primer elemento distinto
-a cero de cada fila
+Este programa funciona abriendo una txt. y siguiendo el mismo algoritmo que el de Gauss pero ahora
+despues de escalonar por eliminación Gaussiana, se tiene que otener 1 en la diagonal principal. Primero empezamos por la 
+ultima fila dividiendo el numero que está en la diagonal sobre sí mismo así como también la fila última pero sobre el anterior número. 
+Luego de esto, se tiene que dejar 0 los numeros arriba del 1 de la diagonal. Se va siguiendo este algoritmo hasta llegar a la fila 0 y tener la diagonal principal con 1 y 0 debajo y arriba de esta diagonal.
